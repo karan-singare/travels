@@ -1,0 +1,77 @@
+.story {
+    width: 75%;
+    margin: 0 auto;
+    box-shadow: 0 3rem 6rem rgba($color-black, .1);
+    background-color: rgba($color-white, .6);
+    border-radius: 3px;
+    padding: 6rem;
+        /* to compensate the loss of padding due to transform of shape*/
+    padding-left: 9rem;
+    font-size: $default-font-size;
+    transform: skewX(-12deg);
+
+    &__shape {
+        /*
+            *to work with shape-outside property shape must be floated
+            *also the dimensions sholud be defined for the shape to work this property
+            *with the help of this property we make text beside it to float around it
+            *circle(50% at 50% 50%) means radius 50% of height/width and (50% 50%) location of center vertically and horiazontally
+        */
+        width: 15rem;
+        height: 15rem;
+        float: left;
+        shape-outside: circle(50% at 50% 50%);
+        clip-path: circle(50% at 50% 50%);
+        /*
+            *the best way to move around with floated element is to
+            use transform despite of messing with padding and margin
+        */
+        transform: translateX(-3rem) skewX(12deg);
+        position: relative;/*for the absolute positioning of caption*/
+    }
+
+    &__img {
+        /*
+            *to assign the dimensions of parent to image
+            *if the width of original image is greater than height then we will give height 100%
+            *and if the height of the original image is grater than width then we will use width 100%
+        */
+        height: 100%;
+        transform: scale(1.4);
+        transition: all .5s;
+
+
+    }
+    &__text {
+        transform: skewX(12deg);
+    }
+    &__caption {
+        @include move_to_center;
+        color: $color-white;
+        text-transform: uppercase;
+        font-size: 1.7rem;
+        text-align: center;
+            /*situation before hover*/
+        opacity: 0;
+        transform: translate(-50%,20%);
+        transition: all .5s;
+        backface-visibility: hidden;
+            /*
+                *above transfrom will overwrite the transform used in the mixin
+                *-50% is added to behave properly in accordance with the previous transform used in the mixin
+            */
+
+    }
+
+    &:hover &__caption {
+        transform: translate(-50%,-50%);
+        opacity: 1;
+    }
+    &:hover &__img {
+        transform: scale(1);
+        filter: blur(3px) brightness(80%);
+        /*
+            *values lower tahn 100% makes darker and greater than 100% maks the image brighter in case of filter brightness
+        */
+    }
+}

@@ -1,0 +1,96 @@
+.btn {
+    &, /*to apply all the styles to simple button apart from links*/
+    &:link,
+    &:visited {
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 1.5rem 4rem;
+        display: inline-block;/*to get padding and some block stylings*/
+        border-radius: 20rem;/* a very high number makes it complete sermiccircle or circle*/
+        transition: all .2s;/*this is to animate the changing properties*/
+        position: relative;
+        font-size: $default-font-size;
+
+        /* Changes for <button> */
+        border: none;
+        cursor: pointer;
+
+    }
+
+    &:hover {
+        transform: translateY(-.3rem);
+        box-shadow: 0 .5px 1rem rgba($color-black, 0.2);/* x-dir y-dir blur color*/
+        &::after {
+            transform: scaleX(1.4) scaleY(1.6);
+            opacity: 0;
+        }
+    }
+
+    &:active,/*When link is clicked*/
+    &:focus { /*When button is clicked*/
+        outline: none;
+        transform:  translateY(-.1rem);
+        box-shadow: 0 .5rem 1rem rgba($color-black, 0.2);
+    }
+
+    &--white {
+        background-color: $color-white;
+        color: $color-grey-dark;
+        &::after {
+            background-color: $color-white;
+        }
+    }
+    &--green {
+        background-color: $color-primary;
+        color: $color-white;
+        &::after {
+            background-color: $color-primary;
+        }
+    }
+
+    &--animated {
+        animation: moveIBottom .5s ease-out .75s;
+        animation-fill-mode: backwards;/*automatically applies the styles of 0% before animation starts*/
+    }
+
+    &::after {/*to appear we must provide its content propertiy*/
+        content: "";
+        display: inline-block;
+        /*A pseudo element is basically trated like the child of an element */
+        height: 100%;/*wrt .btn*/
+        width: 100%;
+        border-radius: 20rem;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;/*it will push this behind the button*/
+        transition: all .2s;
+    }
+
+}
+
+.btn-text {
+    &:link,
+    &:visited {
+        font-size: $default-font-size;
+        color: $color-primary;
+        display: inline-block;
+        text-decoration: none;
+        border-bottom: 1px solid $color-primary;
+            /*if the values are very small we then use of either oi the unit of pixels or rem hardly matters*/
+        padding: 3px;
+        transition: all .2s;
+    }
+
+    &:hover {
+        background-color: $color-primary;
+        color: $color-white;
+        box-shadow: 0 1rem 2rem rgba($color-black, .15);
+        transform: translateY(-2px);
+    }
+
+    &:active {
+        box-shadow: 0 .5rem 1rem rgba($color-black, .15);
+        transform: translateY(0);/*moving back to initial position when clicked*/
+    }
+}

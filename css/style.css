@@ -1,0 +1,967 @@
+/* COLORS */
+/*FONT */
+/*GRID*/
+/*OTHER VARIABLES*/
+@keyframes moveInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-10rem); }
+  80% {
+    transform: translateX(1rem); }
+  100% {
+    opacity: 1;
+    transform: translateX(0); } }
+
+@keyframes moveInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(10rem); }
+  80% {
+    transform: translateX(-1rem); }
+  100% {
+    opacity: 1;
+    transform: translateX(0); } }
+
+@keyframes moveIBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(3rem); }
+  100% {
+    opacity: 1;
+    transform: translateY(0); } }
+
+/* browser elements comes with some default padding and margin and we don't want that so removed */
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit; }
+
+html {
+  /*setting the root font stize*/
+  /*the font-size offered by browser by default is 16px*/
+  font-size: 62.5%;
+  /*this implies nowonwards 1rem = 10px*/
+  /*62.5% of 16px = 10px that is what we want*/ }
+
+body {
+  box-sizing: border-box;
+  /*borders and padding are no longer added to the total width  or height of the elements*/ }
+
+body {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
+  color: #777;
+  padding: 3rem; }
+
+.heading-primary {
+  color: #fff;
+  text-transform: uppercase;
+  margin-bottom: 6rem; }
+  .heading-primary--main {
+    font-size: 6rem;
+    font-weight: 400;
+    letter-spacing: 3.5rem;
+    /*block element add line breaks before and after automatically*/
+    display: block;
+    animation-name: moveInLeft;
+    animation-duration: 1s;
+    /* how the animation will proceed */
+    animation-timing-function: ease-out;
+    /*before animation starts it will wait for this much time*/
+    /* animation-delay: 3s; */
+    /* no of times animation repeat itself */
+    /* animation-iteration-count: 3; */ }
+  .heading-primary--sub {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 1.75rem;
+    display: block;
+    /* shorthand for the animaion propreties */
+    animation: moveInRight 1s ease-out;
+    /* to overcome shakeyness caused by the animation it's a hack */
+    backface-visibility: hidden; }
+
+.heading-secondary {
+  font-size: 3.5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  /*trick to make the color of the text gradient*/
+  background-image: linear-gradient(to right, #2cec6b, #28b485);
+  display: inline-block;
+  -webkit-background-clip: text;
+  color: transparent;
+  transition: all .2s;
+  letter-spacing: .2rem; }
+  .heading-secondary:hover {
+    transform: skewY(0deg) skewX(15deg) scale(1.1);
+    text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); }
+
+.heading-tertiary {
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-transform: uppercase; }
+
+.paragraph {
+  font-size: 1.6rem; }
+  .paragraph:not(:last-child) {
+    margin-bottom: 3rem; }
+
+.u-center-text {
+  text-align: center !important; }
+
+.u-margin-bottom-big {
+  margin-bottom: 8rem !important; }
+
+.u-margin-bottom-medium {
+  margin-bottom: 4rem !important; }
+
+.u-margin-bottom-small {
+  margin-bottom: 1.5rem !important; }
+
+.u-margin-top-big {
+  margin-top: 8rem !important; }
+
+.u-margin-top-huge {
+  margin-top: 10rem !important; }
+
+.row {
+  /*if the device-width is not enough i.e. lesser than 114rem, then width of the element will be device-width*/
+  max-width: 114rem;
+  /*this is the trick to center the block element inside the block element*/
+  margin: 0 auto;
+  /*selecting everything except last child */
+  /* used as a standard clearfix */
+  /*
+        * selecting elements having class which starts with "col-" => [class^="col-"]
+        * selecting elements having class which ends with "col-" => [class$="col-"]
+        * selecting elements having class which contanis "col-" => [class*="col-"]
+    */ }
+  .row:not(:last-child) {
+    margin-bottom: 8rem; }
+  .row::after {
+    content: '';
+    display: table;
+    clear: both; }
+  .row [class^="col-"] {
+    float: left; }
+    .row [class^="col-"]:not(:last-child) {
+      margin-right: 6rem; }
+  .row .col-1-of-2 {
+    /*to use the variables inside calc functions we neeed to use this syntax*/
+    width: calc((100% - 6rem)/2); }
+  .row .col-1-of-3 {
+    width: calc((100% - 2 * 6rem) / 3); }
+  .row .col-1-of-4 {
+    width: calc((100% - 3 * 6rem) / 4); }
+  .row .col-2-of-3 {
+    width: calc(((100% - 2 * 6rem) / 3) * 2 + 6rem); }
+  .row .col-2-of-4 {
+    width: calc(((100% - 3 * 6rem) / 4) * 2 +  6rem); }
+  .row .col-3-of-4 {
+    width: calc(((100% - 3 * 6rem) / 4) * 3 + 2 * 6rem); }
+
+.navigation {
+  /*when checkbox is checked we are selecting icon inside button*/ }
+  .navigation__checkbox {
+    display: none; }
+  .navigation__button {
+    background-color: #fff;
+    border-radius: 50%;
+    height: 7rem;
+    width: 7rem;
+    position: fixed;
+    top: 6rem;
+    right: 6rem;
+    z-index: 50;
+    box-shadow: 0 2rem 3rem rgba(0, 0, 0, 0.1);
+    text-align: center;
+    cursor: pointer; }
+  .navigation__background {
+    height: 6rem;
+    width: 6rem;
+    border-radius: 50%;
+    position: fixed;
+    top: 6.5rem;
+    right: 6.5rem;
+    background-image: radial-gradient(#2cec6b, #28b485);
+    z-index: 30;
+    transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1); }
+  .navigation__nav {
+    height: 100vh;
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    right: 0;
+    /*making nav invisible*/
+    width: 0;
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
+  .navigation__list {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    list-style: none;
+    text-align: center; }
+  .navigation__item {
+    margin: 1rem; }
+  .navigation__link:link, .navigation__link:visited {
+    display: inline-block;
+    font-size: 3rem;
+    font-weight: 300;
+    padding: 1rem 2rem;
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    background-image: linear-gradient(120deg, transparent 0%, transparent 50%, #fff 50%);
+    background-size: 230%;
+    transition: all .4s; }
+    .navigation__link:link span, .navigation__link:visited span {
+      display: inline-block;
+      margin-right: 2rem; }
+  .navigation__link:hover, .navigation__link:active {
+    background-position: 100%;
+    color: #7ed56f; }
+  .navigation__checkbox:checked ~ .navigation__background {
+    transform: scale(70); }
+  .navigation__checkbox:checked ~ .navigation__nav {
+    width: 100%;
+    opacity: 1; }
+  .navigation__icon {
+    position: relative;
+    margin-top: 3.5rem; }
+    .navigation__icon, .navigation__icon::after, .navigation__icon::before {
+      width: 3rem;
+      height: 2px;
+      background-color: #333;
+      display: inline-block;
+      z-index: 90; }
+    .navigation__icon::after, .navigation__icon::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      transition: all .2s; }
+    .navigation__icon::after {
+      top: -.8rem; }
+    .navigation__icon::before {
+      top: .8rem; }
+  .navigation__button:hover .navigation__icon::before {
+    top: -1rem; }
+  .navigation__button:hover .navigation__icon::after {
+    top: 1rem; }
+  .navigation__checkbox:checked + .navigation__button .navigation__icon {
+    background-color: transparent;
+    /*to seem as the it is disappeared*/ }
+  .navigation__checkbox:checked + .navigation__button .navigation__icon::before {
+    top: 0;
+    transform: rotate(45deg); }
+  .navigation__checkbox:checked + .navigation__button .navigation__icon::after {
+    top: 0;
+    transform: rotate(-45deg); }
+
+.header {
+  height: 95vh;
+  background-image: linear-gradient(to right bottom, rgba(44, 236, 107, 0.6), rgba(40, 180, 133, 0.6)), url("../images/hero.webp");
+  background-size: cover;
+  /*try to fit the element in theh total width*/
+  background-position: top;
+  /*whatever the width of the background top of background will always  on the top*/
+  clip-path: polygon(0 0, 100% 0, 100% 70vh, 0 100%);
+  /**used to create a shape**/
+  position: relative; }
+  .header__logo-box {
+    position: absolute;
+    top: 4rem;
+    left: 4rem; }
+  .header__logo {
+    height: 3.5rem; }
+  .header__text-box {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* here 50% means 50% of elements dimensions not the parent dimensions*/
+    text-align: center;
+    /*incline block in this block will be treated as text*/ }
+
+.footer {
+  background-color: #333;
+  color: #f7f7f7;
+  padding: 10rem 0;
+  font-size: 1.4rem; }
+  .footer__logo-box {
+    text-align: center;
+    /*as image is inline element so will be treated like text*/
+    margin-bottom: 8rem; }
+  .footer__logo {
+    width: 15rem; }
+  .footer__navigation {
+    border-top: 1px solid #777;
+    padding-top: 2rem;
+    display: inline-block; }
+  .footer__list {
+    list-style: none; }
+  .footer__item {
+    display: inline-block; }
+    .footer__item:not(:last-child) {
+      margin-right: 1.5rem; }
+  .footer__link:link, .footer__link:visited {
+    color: #f7f7f7;
+    text-decoration: none;
+    background-color: #333;
+    text-transform: uppercase;
+    display: inline-block;
+    transition: all .2s; }
+  .footer__link:hover, .footer__link:active {
+    color: #7ed56f;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.4);
+    transform: rotate(5deg) scale(1.5); }
+  .footer__copyright {
+    border-top: 1px solid #777;
+    padding-top: 2rem;
+    width: 80%;
+    float: right; }
+
+.btn, .btn:link, .btn:visited {
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 1.5rem 4rem;
+  display: inline-block;
+  /*to get padding and some block stylings*/
+  border-radius: 20rem;
+  /* a very high number makes it complete sermiccircle or circle*/
+  transition: all .2s;
+  /*this is to animate the changing properties*/
+  position: relative;
+  font-size: 1.6rem;
+  /* Changes for <button> */
+  border: none;
+  cursor: pointer; }
+
+.btn:hover {
+  transform: translateY(-0.3rem);
+  box-shadow: 0 0.5px 1rem rgba(0, 0, 0, 0.2);
+  /* x-dir y-dir blur color*/ }
+  .btn:hover::after {
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0; }
+
+.btn:active, .btn:focus {
+  /*When button is clicked*/
+  outline: none;
+  transform: translateY(-0.1rem);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); }
+
+.btn--white {
+  background-color: #fff;
+  color: #777; }
+  .btn--white::after {
+    background-color: #fff; }
+
+.btn--green {
+  background-color: #7ed56f;
+  color: #fff; }
+  .btn--green::after {
+    background-color: #7ed56f; }
+
+.btn--animated {
+  animation: moveIBottom .5s ease-out .75s;
+  animation-fill-mode: backwards;
+  /*automatically applies the styles of 0% before animation starts*/ }
+
+.btn::after {
+  /*to appear we must provide its content propertiy*/
+  content: "";
+  display: inline-block;
+  /*A pseudo element is basically trated like the child of an element */
+  height: 100%;
+  /*wrt .btn*/
+  width: 100%;
+  border-radius: 20rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  /*it will push this behind the button*/
+  transition: all .2s; }
+
+.btn-text:link, .btn-text:visited {
+  font-size: 1.6rem;
+  color: #7ed56f;
+  display: inline-block;
+  text-decoration: none;
+  border-bottom: 1px solid #7ed56f;
+  /*if the values are very small we then use of either oi the unit of pixels or rem hardly matters*/
+  padding: 3px;
+  transition: all .2s; }
+
+.btn-text:hover {
+  background-color: #7ed56f;
+  color: #fff;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px); }
+
+.btn-text:active {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  transform: translateY(0);
+  /*moving back to initial position when clicked*/ }
+
+.composition {
+  position: relative;
+  /*
+        *when hover on the complete compostion element select the photo which is not being hovered
+        *final will look like .compostion:hover .composition__photo:not(:hover)
+    */ }
+  .composition__photo {
+    width: 55%;
+    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.4);
+    border-radius: 2px;
+    position: absolute;
+    z-index: 10;
+    transition: all .2s;
+    outline-offset: 2rem; }
+    .composition__photo--pic1 {
+      left: 0;
+      top: -2rem; }
+    .composition__photo--pic2 {
+      right: 0;
+      top: 2rem; }
+    .composition__photo--pic3 {
+      left: 20%;
+      top: 10rem; }
+    .composition__photo:hover {
+      /*
+                *outline property is similar to border
+                *using property outline-offset we can get the space between content and outline border
+                * translateY produces effect as if it is coming out
+            */
+      outline: 1.5rem solid #7ed56f;
+      transform: scale(1.05) translateY(-1.5px);
+      box-shadow: 0 2.5rem 4rem rgba(0, 0, 0, 0.5);
+      z-index: 20; }
+  .composition:hover .composition__photo:not(:hover) {
+    transform: scale(0.95); }
+
+.feature-box {
+  background-color: rgba(255, 255, 255, 0.8);
+  font-size: 1.5rem;
+  padding: 2.5rem;
+  text-align: center;
+  border-radius: 3px;
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
+  transition: transform .2s; }
+  .feature-box__icon {
+    /*icons we are using is basically a font so we can use font properties for that*/
+    font-size: 6rem;
+    margin-bottom: .5rem;
+    display: inline-block;
+    /*to apply linear-gradient exactly to the icon*/
+    background-image: linear-gradient(to right, #2cec6b, #28b485);
+    -webkit-background-clip: text;
+    color: transparent; }
+  .feature-box:hover {
+    transform: translateY(-1.5rem) scale(1.03); }
+
+/*FUNCTIONALITY*/
+.card {
+  /*
+        *use of perspective to appear the rotating element appear like it is coming out from the plane while rotating
+        *perspective property is defined on the parent element of the element ehich is rotating
+    */
+  perspective: 150rem;
+  -moz-perspective: 150rem;
+  position: relative;
+  /*
+        *to fix the floating effect use
+     */
+  height: 52rem;
+  /*
+        *when we hover the card we want the caid__side to be transformed
+        *this will lokk like (.card:hover .card__side)
+    */
+  /*FUNCTIONALITY*/
+  /*  BACK SIDE STYLEING */ }
+  .card__side {
+    height: 52rem;
+    /*
+            *to hide the extra part from the children
+        */
+    overflow: hidden;
+    transition: all .8s ease;
+    border-radius: 3px;
+    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
+    /*
+            * when we use position: absolute; we take the element out of the noramal flow
+            * thus parent element losses it s height
+            *to fix there is no clearfix as we have in float case
+            *so to fix this we assign the same height as children to the parent element
+        */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /*
+            * (backface-visibility: hidden) hides the backpart of the element
+        */
+    backface-visibility: hidden; }
+    .card__side--back {
+      /*
+                *back side of the card means it is flipped already before we hover on it
+                when we hover on it, it will come to original position
+            */
+      transform: rotateY(180deg); }
+      .card__side--back--1 {
+        background-image: linear-gradient(to right bottom, #ffb900, #ff7730); }
+      .card__side--back--2 {
+        background-image: linear-gradient(to right bottom, #2cec6b, #28b485); }
+      .card__side--back--3 {
+        background-image: linear-gradient(to right bottom, #2998ff, #5643fa); }
+  .card:hover .card__side--front {
+    transform: rotateY(-180deg); }
+  .card:hover .card__side--back {
+    transform: rotateY(0); }
+  .card__picture {
+    background-size: cover;
+    height: 23rem;
+    background-blend-mode: screen;
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    /*
+            *because of clip path property the border-radius is gone which was inherited from card__side
+            *so we have to set it manually
+        */
+    border-radius: 3px; }
+    .card__picture--pic1 {
+      /*
+                *finally this code will be written on css/style.css so we will write the url wrt this only
+                *this will lokk like (.card:hover .card__side)
+                *background-blend-mode create mixing of the images
+
+            */
+      background-image: linear-gradient(to right bottom, #ffb900, #ff7730), url("../images/photo5.jpeg"); }
+    .card__picture--pic2 {
+      background-image: linear-gradient(to right bottom, #2cec6b, #28b485), url("../images/photo6.jpg"); }
+    .card__picture--pic3 {
+      background-image: linear-gradient(to right bottom, #2998ff, #5643fa), url("../images/photo7.jpg"); }
+  .card__heading {
+    font-size: 2.8rem;
+    font-weight: 300;
+    color: #fff;
+    text-align: right;
+    text-transform: uppercase;
+    position: absolute;
+    top: 12rem;
+    right: 2rem;
+    width: 75%; }
+  .card__heading-span {
+    /*
+            *(box-decoration-break: clone) applies the same styles two both the blocks if it gets a
+            line break and get splitted into two blocks
+        */
+    padding: 1rem 1.5rem;
+    -webkit-box-decoration-break: clone; }
+    .card__heading-span--1 {
+      background-image: linear-gradient(to right bottom, rgba(255, 185, 0, 0.85), rgba(255, 119, 48, 0.85)); }
+    .card__heading-span--2 {
+      background-image: linear-gradient(to right bottom, rgba(44, 236, 107, 0.85), rgba(40, 180, 133, 0.85)); }
+    .card__heading-span--3 {
+      background-image: linear-gradient(to right bottom, rgba(41, 152, 255, 0.85), rgba(86, 67, 250, 0.85)); }
+  .card__details {
+    padding: 3rem;
+    margin: 0 auto;
+    text-align: center; }
+    .card__details ul {
+      display: inline-block;
+      list-style: none;
+      width: 80%; }
+      .card__details ul li {
+        font-size: 1.5rem;
+        padding: 1rem; }
+        .card__details ul li:not(:last-child) {
+          border-bottom: 1px solid #eee; }
+  .card__card_to_action {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /*
+            *to make the btn center as it is inline-block and will be treated as text
+        */
+    text-align: center; }
+  .card__price-box {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 8rem; }
+  .card__price-only {
+    font-size: 2rem;
+    text-transform: uppercase; }
+  .card__price-value {
+    /*
+            *when we use bigger font-size it is nice to use thin font-weight
+        */
+    font-size: 6rem;
+    font-weight: 100; }
+
+.story {
+  width: 75%;
+  margin: 0 auto;
+  box-shadow: 0 3rem 6rem rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 3px;
+  padding: 6rem;
+  /* to compensate the loss of padding due to transform of shape*/
+  padding-left: 9rem;
+  font-size: 1.6rem;
+  transform: skewX(-12deg); }
+  .story__shape {
+    /*
+            *to work with shape-outside property shape must be floated
+            *also the dimensions sholud be defined for the shape to work this property
+            *with the help of this property we make text beside it to float around it
+            *circle(50% at 50% 50%) means radius 50% of height/width and (50% 50%) location of center vertically and horiazontally
+        */
+    width: 15rem;
+    height: 15rem;
+    float: left;
+    shape-outside: circle(50% at 50% 50%);
+    clip-path: circle(50% at 50% 50%);
+    /*
+            *the best way to move around with floated element is to
+            use transform despite of messing with padding and margin
+        */
+    transform: translateX(-3rem) skewX(12deg);
+    position: relative;
+    /*for the absolute positioning of caption*/ }
+  .story__img {
+    /*
+            *to assign the dimensions of parent to image
+            *if the width of original image is greater than height then we will give height 100%
+            *and if the height of the original image is grater than width then we will use width 100%
+        */
+    height: 100%;
+    transform: scale(1.4);
+    transition: all .5s; }
+  .story__text {
+    transform: skewX(12deg); }
+  .story__caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 1.7rem;
+    text-align: center;
+    /*situation before hover*/
+    opacity: 0;
+    transform: translate(-50%, 20%);
+    transition: all .5s;
+    backface-visibility: hidden;
+    /*
+                *above transfrom will overwrite the transform used in the mixin
+                *-50% is added to behave properly in accordance with the previous transform used in the mixin
+            */ }
+  .story:hover .story__caption {
+    transform: translate(-50%, -50%);
+    opacity: 1; }
+  .story:hover .story__img {
+    transform: scale(1);
+    filter: blur(3px) brightness(80%);
+    /*
+            *values lower tahn 100% makes darker and greater than 100% maks the image brighter in case of filter brightness
+        */ }
+
+.bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  background-size: 100%;
+  opacity: .15;
+  overflow: hidden;
+  /*making the video cover whole background*/ }
+  .bg-video__content {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /*
+                *object-fit:cover property fits the object maintaining the aspect ratio
+                *extra part get clipped-off;
+                *it works with elements as image but background-size don't work with video
+            */ }
+
+.form {
+  /*
+        *  using (+) we select the adjacent sibling i.e the sibling that is right next of an element
+        * using (~) we select genreal siblings
+    */ }
+  .form__group:not(:last-child) {
+    margin-bottom: 2rem; }
+  .form__input {
+    /*
+            *in form elements we give side padding more than vaertical one to look better
+        */
+    font-family: inherit;
+    font-size: 1.5rem;
+    padding: 1.5rem 2rem;
+    border-radius: 2px;
+    color: inherit;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+    /* transparent border is added to nullyfy the efect of increase in width of input elements when they are on focus*/
+    border: 3px solid transparent;
+    width: 90%;
+    display: block;
+    transition: all .2s; }
+    .form__input::-webkit-input-placeholder {
+      color: #999; }
+    .form__input:focus {
+      outline: none;
+      box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+      border-bottom: 3px solid #7ed56f; }
+    .form__input:focus:invalid {
+      border-bottom: 3px solid #ff7730; }
+  .form__label {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-left: 2rem;
+    display: block;
+    transition: all .2s; }
+  .form__input:placeholder-shown + .form__label {
+    /*
+        * when placeholder is shown i.e nothing is written in the input field, then
+        * we are making the label invisible
+    */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6rem); }
+  .form__radio-group {
+    width: 50%;
+    display: inline-block; }
+  .form__radio-label {
+    font-size: 1.6rem; }
+  .form__radio-group {
+    width: 49%;
+    /*50% was not working so used the 49%*/
+    display: inline-block; }
+  .form__radio-input {
+    display: none; }
+  .form__radio-label {
+    font-size: 1.6rem;
+    cursor: pointer;
+    position: relative;
+    padding-left: 5rem;
+    text-transform: capitalize; }
+  .form__radio-button {
+    height: 3rem;
+    width: 3rem;
+    border: 5px solid #7ed56f;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: -1rem;
+    /*
+            *for using absolute positioning it its not mandatory
+            that parent should laways be relative, it can have aohter values klike absolute
+        */ }
+    .form__radio-button::after {
+      content: '';
+      height: 1.3rem;
+      width: 1.3rem;
+      display: block;
+      border-radius: 50%;
+      background-color: #7ed56f;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: opacity .1s; }
+  .form__radio-input:checked ~ .form__radio-label .form__radio-button::after {
+    opacity: 1; }
+
+.icon-box {
+  display: inline-block;
+  font-size: 3rem;
+  padding: 0;
+  margin: 0;
+  vertical-align: middle; }
+
+.popup {
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  transition: all .3s;
+  /*
+        *to divide a dive into two equal height divs
+        * give parent as display: table;
+        *give both the children display: table-cell;
+        *it make us feel as if it is a table
+    */
+  /*Popup opening state*/
+  /*selecting the elemnt if it is being targeted by being clicked from some link*/ }
+  .popup__content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 75%;
+    background-color: #fff;
+    box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    display: table;
+    overflow: hidden;
+    /*condition before popup animation*/
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.25);
+    transition: all .4s .2s;
+    /*third value for transition delay*/ }
+  .popup__left {
+    width: 34%;
+    display: table-cell; }
+  .popup__right {
+    width: 66%;
+    display: table-cell;
+    vertical-align: middle;
+    padding: 0 5rem; }
+  .popup__img {
+    display: block;
+    width: 100%; }
+  .popup__text {
+    font-size: 1.4rem;
+    margin-bottom: 4rem;
+    /*dividing the content of paragraph in columns*/
+    column-count: 2;
+    column-gap: 4rem;
+    column-rule: 1px solid #eee;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    /*it's not supperting in chrome*/
+    /*
+                * 1em = font-size of the current element here in this element 1em = 14px
+                *column-gap  have default size of 1em
+                *column-rule is used to place a border
+            */ }
+  .popup:target {
+    opacity: 1;
+    visibility: visible; }
+  .popup:target .popup__content {
+    /*condition fater popup animation*/
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1); }
+  .popup__close:link, .popup__close:visited {
+    color: #777;
+    position: absolute;
+    top: 2.5rem;
+    right: 2.5rem;
+    font-size: 3rem;
+    text-decoration: none;
+    display: inline-block;
+    transition: all .2s;
+    line-height: 1;
+    /*removed default line-height so can be positioned properly*/ }
+  .popup__close:hover {
+    color: #7ed56f; }
+
+.image-popup {
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  /*Popup opening state*/
+  /*selecting the elemnt if it is being targeted by being clicked from some link*/ }
+  .image-popup__container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: 90%;
+    background-color: #fff;
+    /*condition before popup animation*/
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(-50%, -50%) scale(0.25); }
+  .image-popup__img {
+    width: 100%;
+    height: 100%; }
+  .image-popup:target {
+    opacity: 1;
+    visibility: visible; }
+  .image-popup:target .image-popup__container {
+    /*condition fater popup animation*/
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+    transition: all .4s .2s; }
+  .image-popup__close:link, .image-popup__close:visited {
+    color: #777;
+    position: absolute;
+    top: -2.5rem;
+    right: -3.5rem;
+    font-size: 6rem;
+    text-decoration: none;
+    display: inline-block;
+    transition: all .2s;
+    line-height: 1;
+    /*removed default line-height so can be positioned properly*/ }
+  .image-popup__close:hover {
+    color: #7ed56f; }
+
+.section-about {
+  background-color: #f7f7f7;
+  padding: 25rem 0;
+  margin-top: -25vh; }
+
+.section-features {
+  padding: 20rem 0;
+  background-image: linear-gradient(to right bottom, rgba(44, 236, 107, 0.6), rgba(40, 180, 133, 0.6)), url("../images/photo4.jpg");
+  background-size: cover;
+  transform: skewY(-7deg);
+  margin-top: -11rem;
+  /*
+        *this is direct child selector
+        *selects all the children which are direct child of the element
+        *to nullify the skewY effect in the children we will apply skewY in opposite directtion
+    */ }
+  .section-features > * {
+    transform: skewY(7deg); }
+
+.section-tours {
+  background-color: #f7f7f7;
+  padding: 25rem 0 15rem 0;
+  margin-top: -11rem; }
+
+.section-stories {
+  position: relative;
+  padding: 15rem 0; }
+
+.section-book {
+  padding: 15rem 0;
+  background-image: linear-gradient(#2cec6b, #28b485); }
+
+.book {
+  background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 50%, transparent 50%), url("../images/form-bg.jpg");
+  background-size: cover;
+  height: 50rem;
+  border-radius: 3px;
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.6); }
+  .book__form {
+    width: 50%;
+    padding: 6rem; }

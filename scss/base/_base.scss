@@ -1,0 +1,19 @@
+/* browser elements comes with some default padding and margin and we don't want that so removed */
+ *,
+ *::after,
+ *::before {
+    margin:0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+        /*setting the root font stize*/
+        /*the font-size offered by browser by default is 16px*/
+    font-size: 62.5%;/*this implies nowonwards 1rem = 10px*/
+    /*62.5% of 16px = 10px that is what we want*/
+}
+
+body {
+    box-sizing: border-box;/*borders and padding are no longer added to the total width  or height of the elements*/
+}
