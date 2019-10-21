@@ -8,6 +8,10 @@
     box-shadow: 0 1.5rem 4rem rgba($color-black, .15);
     transition: transform .2s;
 
+    @include respond(tab-port) {
+                padding: 2rem;
+    }
+
     &__icon {
         /*icons we are using is basically a font so we can use font properties for that*/
         font-size: 6rem;
@@ -16,6 +20,10 @@
         background-image: linear-gradient(to right, $color-primary-light, $color-primary-dark);
         -webkit-background-clip: text;
         color: transparent;
+
+        @include respond(tab-port) {
+                margin-bottom: 0;
+        }
 
     }
 

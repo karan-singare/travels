@@ -1,0 +1,172 @@
+/*
+COLORS:
+    Light green: #7ed56f;
+    Medium greeen: #55c57a;
+    Dark green: #28b485
+ */
+
+/* browser elements comes with some default padding and margin and we don't want that so removed */
+ * {
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;/*borders and padding are no longer added to the total width  or height of the elements*/
+}
+
+body {
+    font-family: "Loto", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #777;
+    padding: 30px;
+}
+
+.header {
+
+    height: 95vh;
+    background-image: linear-gradient(to right bottom,
+        rgba(126, 213, 111, 0.6),
+        rgba(85, 198, 122, 0.6)),
+        url('../images/hero.webp');
+    background-size: cover;/*try to fit the element in theh total width*/
+    background-position: top;/*whatever the width of the background top of background will always  on the top*/
+    clip-path: polygon(0 0, 100% 0, 100% 70vh, 0 100%);/**used to create a shape**/
+    position: relative;
+}
+ .header__logo-box {
+    position: absolute;
+    top:40px;
+    left: 40px;
+}
+
+ .header__logo {
+    height: 35px;
+}
+.header__text-box {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);/* here 50% means 50% of elements dimensions not the parent dimensions*/
+    text-align: center;/*incline block int this block will be treated as text*/
+}
+.heading-primary {
+    color: #ffffff;
+    text-transform: uppercase;
+    margin-bottom: 60px;
+}
+.heading-primary--main {
+    font-size: 60px;
+    font-weight: 400;
+    letter-spacing: 35px;
+        /*block element add line breaks before and after automatically*/
+    display: block;
+    animation-name: moveInLeft;
+    animation-duration: 1s;
+        /* how the animation will proceed */
+    animation-timing-function: ease-out;
+        /*before animation starts it will wait for this much time*/
+    /* animation-delay: 3s; */
+        /* no of times animation repeat itself */
+    /* animation-iteration-count: 3; */
+
+}
+
+.heading-primary--sub {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 15px;
+    display: block;
+        /* shorthand for the animaion propreties */
+    animation: moveInRight 1s ease-out;
+        /* to overcome shakeyness caused by the animation it's a hack */
+    backface-visibility: hidden;
+}
+
+
+@keyframes moveInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    80% {
+        transform: translateX(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+@keyframes moveInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    80% {
+        transform: translateX(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+@keyframes moveIBottom {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.btn:link,
+.btn:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 15px 40px;
+    display: inline-block;/*to get padding and some block stylings*/
+    border-radius: 200px;/* a very high number makes it complete sermiccircle or circle*/
+    transition: all .2s;/*this is to animate the changing properties*/
+    position: relative;
+
+
+}
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);/* x-dir y-dir blur color*/
+}
+
+.btn:active { /*When button is clicked*/
+    transform:  translateY(-1px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+.btn--white {
+    background-color: #ffffff;
+    color: #777;
+}
+.btn::after {/*to appear we must provide its content propertiy*/
+    content: "";
+    display: inline-block;
+        /*A pseudo element is basically trated like the child of an element */
+    height: 100%;/*wrt .btn*/
+    width: 100%;
+    border-radius: 200px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;/*it will push this behind the button*/
+    transition: all .2s;
+}
+.btn--white::after {
+    background-color: #fff;
+}
+.btn:hover::after {
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0;
+}
+
+.btn--animated {
+    animation: moveIBottom .5s ease-out .75s;
+    animation-fill-mode: backwards;/*automatically applies the styles of 0% before animation starts*/
+}

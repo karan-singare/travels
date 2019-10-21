@@ -1,0 +1,96 @@
+.popup {
+    height: 100vh;
+    width: 100%;
+    background-color: rgba($color-black, .8);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transition: all .3s;
+    /*
+        *to divide a dive into two equal height divs
+        * give parent as display: table;
+        *give both the children display: table-cell;
+        *it make us feel as if it is a table
+    */
+
+    &__content {
+        @include move_to_center;
+        
+        width: 75%;
+        background-color: $color-white;
+        box-shadow: 0 2rem 4rem rgba($color-black, .2);
+        border-radius: 3px;
+        display: table;
+        overflow: hidden;
+        /*condition before popup animation*/
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(.25);
+        transition: all .4s .2s;/*third value for transition delay*/
+
+    }
+
+    &__left {
+        width: 34%;
+        display: table-cell;
+    }
+
+    &__right {
+        width: 66%;
+        display: table-cell;
+        vertical-align: middle;
+        padding: 0 5rem;
+    }
+    &__img {
+        display: block;
+        width: 100%;
+    }
+    &__text {
+        font-size: 1.4rem;
+        margin-bottom: 4rem;
+            /*dividing the content of paragraph in columns*/
+        column-count: 2;
+        column-gap: 4rem;
+        column-rule: 1px solid $color-grey-light-2;
+        -webkit-hyphens: auto;
+        hyphens: auto;/*it's not supperting in chrome*/
+            /*
+                * 1em = font-size of the current element here in this element 1em = 14px
+                *column-gap  have default size of 1em
+                *column-rule is used to place a border
+            */
+
+    }
+    /*Popup opening state*/
+    /*selecting the elemnt if it is being targeted by being clicked from some link*/
+    &:target {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    &:target  &__content{
+        /*condition fater popup animation*/
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    &__close {
+        &:link,
+        &:visited {
+            color: $color-grey-dark;
+            position: absolute;
+            top: 2.5rem;
+            right: 2.5rem;
+            font-size: 3rem;
+            text-decoration: none;
+            display: inline-block;
+            transition: all .2s;
+            line-height: 1;/*removed default line-height so can be positioned properly*/
+        }
+        &:hover {
+            color: $color-primary;
+        }
+    }
+}

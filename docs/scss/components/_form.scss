@@ -1,0 +1,134 @@
+.form {
+
+    &__group {
+        &:not(:last-child) {
+            margin-bottom: 2rem;
+        }
+    }
+
+    &__input {
+        /*
+            *in form elements we give side padding more than vaertical one to look better
+        */
+        font-family: inherit;
+        font-size: 1.5rem;
+        padding: 1.5rem 2rem;
+        border-radius: 2px;
+        color: inherit;
+        background-color: rgba($color-white, .5);
+        border: none;
+            /* transparent border is added to nullyfy the efect of increase in width of input elements when they are on focus*/
+        border: 3px solid transparent;
+        width: 90%;
+        display: block;
+        transition: all .2s;
+
+        @include respond(tab-port) {
+            width:  100%;
+        }
+
+        &::-webkit-input-placeholder {
+            color: $color-grey-dark-2;
+        }
+        &:focus {
+            outline: none;
+            box-shadow: 0 1rem 2rem rgba($color-black, .1);
+            border-bottom: 3px solid $color-primary;
+        }
+        &:focus:invalid {
+            border-bottom: 3px solid $color-secondary-dark;
+        }
+
+
+    }
+
+
+
+    &__label {
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-left: 2rem;
+        display: block;
+        transition: all .2s;
+    }
+    /*
+        *  using (+) we select the adjacent sibling i.e the sibling that is right next of an element
+        * using (~) we select genreal siblings
+    */
+    &__input:placeholder-shown + &__label {
+    /*
+        * when placeholder is shown i.e nothing is written in the input field, then
+        * we are making the label invisible
+    */
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-6rem);
+    }
+
+    &__radio-group {
+        width: 50%;
+        display: inline-block;
+
+        @include respond(tab-port) {
+            width:  100%;
+            margin-bottom: 2rem;
+        }
+    }
+
+    &__radio-label {
+        font-size: $default-font-size;
+    }
+    &__radio-group {
+        width: 49%;
+        /*50% was not working so used the 49%*/
+        display: inline-block;
+    }
+    &__radio-input {
+        display: none;
+    }
+    &__radio-label {
+        font-size: $default-font-size;
+        cursor: pointer;
+        position: relative;
+        padding-left: 5rem;
+        text-transform: capitalize;
+    }
+    &__radio-button {
+        height: 3rem;
+        width: 3rem;
+        border: 5px solid $color-primary;
+        border-radius: 50%;
+        display: inline-block;
+        position: absolute;
+        left: 0;
+        top: -1rem;
+
+        /*
+            *for using absolute positioning it its not mandatory
+            that parent should laways be relative, it can have aohter values klike absolute
+        */
+        &::after {
+            content: '';
+            height: 1.3rem;
+            width: 1.3rem;
+            display: block;
+            border-radius: 50%;
+            background-color: $color-primary;
+            @include move_to_center;
+            opacity: 0;
+            transition: opacity .1s;
+        }
+    }
+
+    &__radio-input:checked ~ &__radio-label &__radio-button::after {
+        opacity: 1;
+    }
+}
+
+.icon-box {
+    display: inline-block;
+    font-size: 3rem;
+    padding: 0;
+    margin: 0;
+    vertical-align: middle;
+}
